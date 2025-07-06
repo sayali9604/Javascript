@@ -62,4 +62,104 @@ console.log("Outside function: " + name); // Outputs: Outside function: Sayali
 we can shadow let using let but not different variable..
 
 # Closures
-It is a function
+It is a function along with its lexical scope is known as closures.
+Functions can access variables that are defined in the same scope or outer scopes — but not in inner scopes.
+Lexical Scope:"A variable can be accessed based on where it was declared in the code."
+
+A function that remembers variables from its outer (parent) scope, even after the outer function has finished running.
+# real life example
+🧁 Think of a bakery:
+You (outer function) bake a cake and give it to your friend (inner function).
+
+You go home — you're done!
+
+But your friend (inner function) still has the cake — even though you're gone!
+✅ Why Do We Need Closures?
+Closures are useful for:
+
+Data hiding (private variables)
+
+Creating functions with preset data
+
+Callback or event handler functions
+
+Maintaining state between function calls
+Uses of Closures:
+-Module Design Pattern
+-Currying
+-Functions like once
+-memoize
+-maintaining state in asynce world
+-setTimeouts
+-Iterators
+
+# Js interview questions
+example of closure 
+function outer(){
+  var a = 10;
+  function inner(){
+    console.log(a);
+  }
+}
+In above ex. function have lexical environment outer function that's the closure.
+
+# Q2:if the outer function is nested inside another function so what will happen ?so inner funcn has access to that environment/ function also .
+//here output will be 10 "hey sayali" 20
+
+function outest(){
+  var c =20;
+  function outer(b){
+    function inner(){
+      console.log(a,b,c);
+    }
+    let a = 10;
+    return inner;
+  }
+  return outer;
+}
+var close = outest()("hey sayali");
+close();
+
+# Q3 :if we have the same name conflict variable like let is again at outest side what will happen.
+//here it will again print beacause it forms closure with inner first,then outer and after that outest..like this hierarchy..
+and if the a is not given in scope chain it will give the reference error that 'a' is not defined.
+function outest(){
+  var c =20;
+  function outer(b){
+    function inner(){
+      console.log(a,b,c);
+    }
+    let a = 10;
+    return inner;
+  }
+  return outer;
+}
+let a = 100;
+var close = outest()("hey sayali");
+close();
+
+# Q4 Advanteges of closures:
+closures also helps in data hiding and encapsulation.
+# Q5 what do mean by data hiding and encapsulation
+if have variable and we want the data privacy and function and other piece of code can not have access to this particular data 
+ex.1 
+function counter(){
+  var count = 0;
+  return  function incrementCounter(){
+    count++;
+  }
+}
+here if want to access count ..we cant because we wrap is inside another function now it's hidden which we used closure here ..
+# constructor in javascript?.
+# Disadvantages of closures
+-overconsumption of memory
+-closed over variables are not garbage colleccted it accumulates the memory.it can also leads to memory leaks.
+ 
+# what garbage collector
+it is like program in js memory or browser engine
+which free up the un-utilise memory.
+# what is relation between garbage collection and closures?
+if we form lots of closure it will not be collected as garbage
+
+
+
